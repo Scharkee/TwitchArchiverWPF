@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -112,7 +113,7 @@ namespace TwitchArchiverWPF
                         }
                         catch { }
                     }
-                    if (profileResponse.data.user.displayName != null && profileResponse.data.user.displayName.All(char.IsLetterOrDigit))
+                    if (profileResponse.data.user.displayName != null && Regex.Match(profileResponse.data.user.displayName, @"^[a-zA-Z0-9_]{4,25}$").Success)
                         streamerName = profileResponse.data.user.displayName;
                 }
             }
